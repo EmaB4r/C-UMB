@@ -1,0 +1,3 @@
+[submodule "terminal-graphics"]
+	path = terminal-graphics
+	url = https://github.com/EmaB4r/terminal-graphics
