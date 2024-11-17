@@ -19,4 +19,6 @@ canvas_t world_get_right_biome();
 canvas_t world_get_up_biome();
 canvas_t world_get_down_biome();
 
+unsigned char world_get_tile(v2i_t coords);
+void world_set_tile(v2i_t coords, unsigned char tile);
 #endif
