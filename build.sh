@@ -1,1 +1,0 @@
-gcc -O1 main.c terminal-graphics/Graphics.c terminal-graphics/ansi-terminal/Ansi.c world.c player.c

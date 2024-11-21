@@ -1,10 +1,7 @@
 #include "player.h"
 #include "terminal-graphics/Graphics.h"
-#include "terminal-graphics/ansi-terminal/Ansi.h"
 #include "world.h"
-#include <complex.h>
-
-#define debpr(fmt, ...) printf(fmt, ##__VA_ARGS__);
+#include "common.h"
 
 player_t P={0};
 
@@ -15,6 +12,9 @@ void handle_input(unsigned char key){
         case 'a': if(player_move_left(&P))world_get_left_biome(); break;
         case 's': if(player_move_down(&P))world_get_down_biome(); break;
         case 'd': if(player_move_right(&P))world_get_right_biome(); break;
+        
+        case 'q': change_inv_sel_item(&P, left); break;
+        case 'e': change_inv_sel_item(&P, right); break;
     }
 }
 
@@ -23,7 +23,7 @@ int main(){
     unsigned char key;
     P.pos.x=BIOMEWIDTH/2;
     P.pos.y=BIOMEHEIGHT/2;
-    inventory_add(&P, 'a', 1);
+    inventory_add(&P, 'A', 1);
     world_create_biome();
     canvas_t * Map;
     canvas_t GameCanvas = canvas_init(BIOMEHEIGHT, BIOMEWIDTH);
@@ -37,6 +37,7 @@ int main(){
         debpr(TEXT_WHYTE("\n"));
         inventory_print(&P);
         debpr("PLAYER COORDS { %d ; %d }    \n", P.pos.x, P.pos.y);
+        debpr("ACTIVE SLOT { %d }     \n", P.active_slot);
         debpr("WORLD COORDS { %d ; %d }    \n", world_get_curr_biome_coord().x, world_get_curr_biome_coord().y);
         debpr((key == 0) ? "Current key: none\n": "Current key: %c     \n", key);
     });
